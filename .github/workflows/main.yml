@@ -1,15 +1,36 @@
-name: hello world
+name: Hello World CI
 
 on:
   push:
-      branches:
-          - main
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-   hello:
-      runs-on: ubuntu-latest
+  hello:
+    runs-on: ubuntu-latest
 
-      steps:
-      - uses: actions/checkout@v2
-      - name: run echo
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Say hello
         run: echo "Hello, world!"
+
+      - name: Show system information
+        run: |
+          echo "Operating System:"
+          uname -a
+          echo "Current directory:"
+          pwd
+          echo "Files in repository:"
+          ls -la
+
+      - name: Run a simple test
+        run: |
+          echo "Running test..."
+          test -f README.md
+          echo "Test passed!"
+
+      - name: Build confirmation
+        run: echo "Build completed successfully."
